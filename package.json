@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "analyze-server": "BUNDLE_ANALYZE=server yarn build && yarn build",
-    "analyze-browser": "BUNDLE_ANALYZE=browser yarn build && yarn build",
-    "analyze-all": "BUNDLE_ANALYZE=both yarn build && yarn build"
+    "start": "NODE_ENV=production node server.js",
+    "analyze-server": "BUNDLE_ANALYZE=server yarn build",
+    "analyze-browser": "BUNDLE_ANALYZE=browser yarn build",
+    "analyze-all": "BUNDLE_ANALYZE=both yarn build"
   },
   "keywords": [],
   "author": "Jack Chapple",
@@ -25,7 +25,8 @@
     "node-sass": "^4.9.3",
     "react": "^16.5.2",
     "react-bulma-components": "^2.0.0",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "sw-precache-webpack-plugin": "^0.11.5"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.1"

@@ -3,6 +3,7 @@ const withPlugins = require('next-compose-plugins')
 const sass = require('@zeit/next-sass')
 const bundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const transpileModules = require('@weco/next-plugin-transpile-modules')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 // next.js configuration
 const nextConfig = {
@@ -11,6 +12,20 @@ const nextConfig = {
       ...config.resolve.alias,
       '_variables.sass': path.resolve(__dirname, 'sass/_variables.scss')
     }
+
+    config.plugins.push(
+      new SWPrecacheWebpackPlugin({
+        verbose: true,
+        staticFileGlobsIgnorePatterns: [/\.next\//],
+        runtimeCaching: [
+          {
+            handler: 'networkFirst',
+            urlPattern: /^https?.*/
+          }
+        ]
+      })
+    )
+
     return config
   }
 }
