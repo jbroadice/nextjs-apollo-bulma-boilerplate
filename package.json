@@ -1,0 +1,33 @@
+{
+  "name": "nextjs-bulma-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "analyze-server": "BUNDLE_ANALYZE=server yarn build && yarn build",
+    "analyze-browser": "BUNDLE_ANALYZE=browser yarn build && yarn build",
+    "analyze-all": "BUNDLE_ANALYZE=both yarn build && yarn build"
+  },
+  "keywords": [],
+  "author": "Jack Chapple",
+  "license": "ISC",
+  "dependencies": {
+    "@weco/next-plugin-transpile-modules": "^0.0.2",
+    "@zeit/next-bundle-analyzer": "^0.1.2",
+    "@zeit/next-sass": "^1.0.1",
+    "bulma": "^0.7.1",
+    "lodash-es": "^4.17.11",
+    "next": "^7.0.1",
+    "next-compose-plugins": "^2.1.1",
+    "node-sass": "^4.9.3",
+    "react": "^16.5.2",
+    "react-bulma-components": "^2.0.0",
+    "react-dom": "^16.5.2"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.1"
+  }
+}
