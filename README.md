@@ -4,7 +4,7 @@
 ### Notes:
 - Uses [react-bulma-components](https://github.com/couds/react-bulma-components)
 - [SASS](https://github.com/zeit/next-plugins/tree/master/packages/next-sass) out-of-the-box
-- Optimised for tree-shaking (*note `import` usage within `/pages` directory*)
+- Optimised for tree-shaking
   - Uses [next-plugin-transpile-modules](https://github.com/wellcometrust/next-plugin-transpile-modules):
     - Includes aliased [lodash-es](https://github.com/lodash/lodash/tree/es) (as `lodash`), which supports tree-shaking using the syntax:
     ```js
