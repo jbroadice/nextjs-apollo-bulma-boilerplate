@@ -1,11 +1,12 @@
 import React from 'react'
 import App, { Container } from 'next/app'
-
+import { ApolloProvider } from 'react-apollo'
+import withApollo from '../hocs/withApollo'
 import { trim } from 'lodash-es'
 
 import '../sass/styles.scss'
 
-export default class MyApp extends App {
+class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {}
 
@@ -27,14 +28,18 @@ export default class MyApp extends App {
   }
 
   render () {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, apolloClient } = this.props
 
     return (
       <Container>
-        <main className={ this.pageClassName }>
-          <Component {...pageProps} />
-        </main>
+        <ApolloProvider client={ apolloClient }>
+          <main className={ this.pageClassName }>
+            <Component {...pageProps} />
+          </main>
+        </ApolloProvider>
       </Container>
     )
   }
 }
+
+export default withApollo(MyApp)

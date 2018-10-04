@@ -8,14 +8,16 @@ import Link from 'next/link'
 const HeroHome = () => (
   <div>
     <Section>
-      <Hero color="primary">
+      <Hero color='primary'>
         <Hero.Body>
           <Container>
-            <Heading>About</Heading>
-            <Heading subtitle size={3}>
-              <Link href="/about">
-                <a>Click me</a>
+            <Heading>
+              <Link prefetch href='/about'>
+                <a>About</a>
               </Link>
+            </Heading>
+            <Heading subtitle size={3}>
+              Subtitle
             </Heading>
           </Container>
         </Hero.Body>
@@ -23,24 +25,30 @@ const HeroHome = () => (
     </Section>
 
     <Section>
-      <Hero color="danger">
+      <Hero color='danger'>
         <Hero.Body>
           <Container>
-            <Heading>Tiles</Heading>
-            <Heading subtitle size={3}>
-              <Link href="/tiles">
-                <a>Click me</a>
+            <Heading>
+              <Link prefetch href='/tiles'>
+                <a>Tiles</a>
               </Link>
+            </Heading>
+            <Heading subtitle size={3}>
+              Subtitle
             </Heading>
           </Container>
         </Hero.Body>
       </Hero>
     </Section>
     <Section>
-      <Hero color="info">
+      <Hero color='info'>
         <Hero.Body>
           <Container>
-            <Heading>Hero title Info</Heading>
+            <Heading>
+              <Link prefetch href='/books'>
+                <a>Books</a>
+              </Link>
+            </Heading>
             <Heading subtitle size={3}>
               Subtitle
             </Heading>
