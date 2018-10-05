@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import HeroHome from '../components/heros/HeroHome'
+import HeroHome from '../components/heroes/HeroHome'
 
 const Index = props => (
   <div>

@@ -1,8 +1,9 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 import { ApolloProvider } from 'react-apollo'
-import withApollo from '../hocs/withApollo'
-import { trim } from 'lodash-es'
+import appWithApollo from '../hocs/appWithApollo'
+import appWithAuth from '../hocs/appWithAuth'
+import { trim, flowRight } from 'lodash-es'
 
 import '../sass/styles.scss'
 
@@ -42,4 +43,4 @@ class MyApp extends App {
   }
 }
 
-export default withApollo(MyApp)
+export default flowRight(appWithApollo, appWithAuth)(MyApp)
