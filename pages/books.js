@@ -7,68 +7,93 @@ import Container from 'react-bulma-components/src/components/container'
 import Heading from 'react-bulma-components/src/components/heading'
 import Loader from 'react-bulma-components/src/components/loader'
 import Message from 'react-bulma-components/src/components/message'
+import { Input } from 'react-bulma-components/src/components/form'
 import ButtonHome from '../components/buttons/ButtonHome'
 
 const GET_BOOKS = gql`
-  {
-    books {
+  query Book($titleLike: String) {
+    books(titleLike: $titleLike) {
       title
       author
     }
   }
 `
 
-const renderLoadingSpinner = () => (
-  <Loader
-    style={{
-      width: 300,
-      height: 300
-    }} />
-)
+class Books extends React.Component {
+  state = {
+    titleLike: ''
+  }
 
-const renderBooksList = ({ books }) => (
-  <ul>
-    { books.map((book, i) => (
-      <li key={ i }>
-        <strong>{ book.title }</strong>
-        <br />
-        { book.author }
-      </li>
-    ))}
-  </ul>
-)
+  renderBooksList = ({ books }) => (
+    <ul>
+      { books.map((book, i) => (
+        <li key={ i }>
+          <strong>{ book.title }</strong>
+          <br />
+          { book.author }
+        </li>
+      ))}
+    </ul>
+  )
 
-const renderErrorMessage = ({ message }) => (
-  <Message color='danger'>
-    <Message.Header>There was an error loading the books.</Message.Header>
-    <Message.Body>{ message || 'Unknown error' }</Message.Body>
-  </Message>
-)
+  renderErrorMessage = ({ message }) => (
+    <Message color='danger'>
+      <Message.Header>There was an error loading the books.</Message.Header>
+      <Message.Body>{ message || 'Unknown error' }</Message.Body>
+    </Message>
+  )
 
-const Books = ({ client }) => (
-  <Section>
-    <Head>
-      <title>Books</title>
-    </Head>
-    <Container className='content'>
-      <Heading size={ 2 }>
-        Books:
-      </Heading>
+  renderLoadingSpinner = () => (
+    <Loader
+      style={{
+        width: 300,
+        height: 300
+      }} />
+  )
 
-      <Query query={ GET_BOOKS }>
-        {({ loading, error, data }) => {
-          console.log('Apollo Query', { loading, error, data })
+  onFilterChange = (evt) => {
+    this.setState({ titleLike: evt.currentTarget.value })
+  }
 
-          if (error) return renderErrorMessage(error)
-          if (loading) return renderLoadingSpinner()
+  getQueryVariables = () => ({
+    titleLike: `%${this.state.titleLike}%`
+  })
 
-          return renderBooksList(data)
-        }}
-      </Query>
+  render() {
+    const { titleLike } = this.state
 
-      <ButtonHome size='large' />
-    </Container>
-  </Section>
-)
+    return (
+      <Section>
+        <Head>
+          <title>Books</title>
+        </Head>
+        <Container className='content'>
+          <Heading size={ 2 }>
+            Books:
+          </Heading>
+
+          <Input
+            placeholder='Filter'
+            size='large'
+            onChange={ this.onFilterChange }
+            value={ titleLike } />
+
+          <Query query={ GET_BOOKS } variables={ this.getQueryVariables() }>
+            {({ loading, error, data }) => {
+              console.log('Apollo Query', { loading, error, data })
+
+              if (error) return this.renderErrorMessage(error)
+              if (loading) return this.renderLoadingSpinner()
+
+              return this.renderBooksList(data)
+            }}
+          </Query>
+
+          <ButtonHome size='large' />
+        </Container>
+      </Section>
+    );
+  }
+}
 
 export default withApollo(Books)

@@ -11,8 +11,8 @@ import Button from 'react-bulma-components/src/components/button'
 import Message from 'react-bulma-components/src/components/message'
 
 const SIGN_IN = gql`
-  mutation Signin($email: String!, $password: String!) {
-    signinUser(email: { email: $email, password: $password}) {
+  mutation Signin($email:String!, $password:String!) {
+    signinUser(input: {email:$email, password:$password}) {
       token
     }
   }
@@ -47,29 +47,32 @@ class SignInBox extends React.Component {
         password
       }
     })
-
-    // this.setState({
-    //   email: '',
-    //   password: ''
-    // })
   }
 
-  onSubmitCompleted = (data) => {
-    console.log('onCompleted', { data })
-    // // Store the token in cookie
-    // document.cookie = cookie.serialize('token', data.signinUser.token, {
-    //   maxAge: 30 * 24 * 60 * 60 // 30 days
-    // })
-    // // Force a reload of all the current queries now that the user is
-    // // logged in
-    // client.cache.reset().then(() => {
-    //   redirect({}, '/')
-    // })
+  onSubmitCompleted = ({ signinUser }) => {
+    if (!signinUser.token) {
+      return
+    }
+    // Store the token in cookie
+    document.cookie = cookie.serialize('token', signinUser.token, {
+      maxAge: 30 * 24 * 60 * 60 // 30 days
+    })
+    // Force a reload of all the current queries now that the user is logged in
+    this.props.client.cache.reset().then(() => {
+      redirect({}, '/')
+    })
   }
 
   onSubmitError = (error) => {
     console.log('onSubmitError', { error })
   }
+
+  renderErrorMessage = ({ message }) => (
+    <Message color='danger'>
+      <Message.Header>Could not sign in.</Message.Header>
+      <Message.Body>{ message || 'Unknown error' }</Message.Body>
+    </Message>
+  )
 
   render() {
     const { client, ...rest } = this.props
@@ -80,7 +83,7 @@ class SignInBox extends React.Component {
         <Mutation mutation={ SIGN_IN } onCompleted={ this.onSubmitCompleted } onError={ this.onSubmitError }>
           {(signinUser, { data, error, loading }) => (
             <form onSubmit={ evt => this.onSubmit({ evt, signinUser }) }>
-              { error && <Message color='danger'><Message.Body>Could not sign in.</Message.Body></Message> }
+              { error && this.renderErrorMessage(error) }
               <Field>
                 <Control>
                   <Input

@@ -11,6 +11,7 @@ import SignInBox from '../components/boxes/SignInBox'
 
 export default class SignIn extends React.Component {
   static async getInitialProps (context) {
+    // TODO: inherit from app props instead of calling checkLoggedIn
     const { loggedInUser } = await checkLoggedIn(context.apolloClient)
 
     if (loggedInUser.user) {

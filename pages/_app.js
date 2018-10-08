@@ -43,4 +43,7 @@ class MyApp extends App {
   }
 }
 
-export default flowRight(appWithApollo, appWithAuth)(MyApp)
+export default flowRight(
+  appWithApollo,
+  appWithAuth
+)(MyApp)

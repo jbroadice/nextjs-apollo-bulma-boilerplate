@@ -2,6 +2,7 @@ import { ApolloClient, InMemoryCache } from 'apollo-boost'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import fetch from 'isomorphic-unfetch'
+import getTokenFromCookie from './getTokenFromCookie'
 
 let apolloClient = null
 
@@ -10,14 +11,14 @@ if (!process.browser) {
   global.fetch = fetch
 }
 
-function create (initialState, { getToken }) {
+function create (initialState, { headers }) {
   const httpLink = createHttpLink({
     uri: 'http://localhost:4000',
     credentials: 'same-origin'
   })
 
-  const authLink = setContext((_, { headers }) => {
-    const token = getToken()
+  const authLink = setContext(() => {
+    const token = getTokenFromCookie(headers)
     return {
       headers: {
         ...headers,
