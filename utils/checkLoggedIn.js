@@ -14,7 +14,6 @@ export default apolloClient => (
   }).then(({ data }) => {
     return { loggedInUser: data }
   }).catch((error) => {
-    console.log('checkLoggedIn error', error)
     // Fail gracefully
     return { loggedInUser: {} }
   })
