@@ -12,9 +12,17 @@ app.prepare()
   .then(() => {
     createServer((req, res) => {
       const parsedUrl = parse(req.url, true)
+      const rootStaticFiles = [
+        '/robots.txt',
+        '/sitemap.xml',
+        '/favicon.ico'
+      ]
       const { pathname } = parsedUrl
 
-      if (pathname === '/service-worker.js') {
+      if (rootStaticFiles.indexOf(pathname) > -1) {
+        const path = join(__dirname, 'static', parsedUrl.pathname)
+        app.serveStatic(req, res, path)
+      } else if (pathname === '/service-worker.js') {
         const filePath = join(__dirname, '.next', pathname)
         app.serveStatic(req, res, filePath)
       } else {
