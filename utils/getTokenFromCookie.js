@@ -2,7 +2,7 @@ import cookie from 'cookie'
 import isNode from './isNode'
 
 export default function getTokenFromCookie(headers) {
-  if (!headers.cookie) {
+  if (!document.cookie && !headers.cookie) {
     return null
   }
 
