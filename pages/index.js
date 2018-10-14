@@ -4,9 +4,9 @@ import signout from '../utils/signout'
 import Head from 'next/head'
 import HeroHome from '../components/heroes/HeroHome'
 import Link from 'next/link'
-import Section from 'react-bulma-components/src/components/section'
-import Container from 'react-bulma-components/src/components/container'
-import Button from 'react-bulma-components/src/components/button'
+import Container from 'react-bulma-components/lib/components/container'
+import Section from 'react-bulma-components/lib/components/section'
+import Button from 'react-bulma-components/lib/components/button'
 
 const Index = props => (
   <div>

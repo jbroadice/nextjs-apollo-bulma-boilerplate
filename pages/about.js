@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 import Head from 'next/head'
-import Section from 'react-bulma-components/src/components/section'
-import Container from 'react-bulma-components/src/components/container'
-import Heading from 'react-bulma-components/src/components/heading'
-import Message from 'react-bulma-components/src/components/message'
-import Button from 'react-bulma-components/src/components/button'
+import Section from 'react-bulma-components/lib/components/section'
+import Container from 'react-bulma-components/lib/components/container'
+import Heading from 'react-bulma-components/lib/components/heading'
+import Message from 'react-bulma-components/lib/components/message'
+import Button from 'react-bulma-components/lib/components/button'
 import ButtonHome from '../components/buttons/ButtonHome'
 
 class About extends Component {

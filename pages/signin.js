@@ -3,10 +3,10 @@ import React from 'react'
 import redirect from '../utils/redirect'
 import checkLoggedIn from '../utils/checkLoggedIn'
 
-import Section from 'react-bulma-components/src/components/section'
-import Hero from 'react-bulma-components/src/components/hero'
-import Container from 'react-bulma-components/src/components/container'
-import Columns from 'react-bulma-components/src/components/columns'
+import Section from 'react-bulma-components/lib/components/section'
+import Hero from 'react-bulma-components/lib/components/hero'
+import Container from 'react-bulma-components/lib/components/container'
+import Columns from 'react-bulma-components/lib/components/columns'
 import SignInBox from '../components/boxes/SignInBox'
 
 export default class SignIn extends React.Component {

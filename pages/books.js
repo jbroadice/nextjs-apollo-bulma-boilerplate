@@ -2,12 +2,12 @@ import { Query, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 import Head from 'next/head'
 
-import Section from 'react-bulma-components/src/components/section'
-import Container from 'react-bulma-components/src/components/container'
-import Heading from 'react-bulma-components/src/components/heading'
-import Loader from 'react-bulma-components/src/components/loader'
-import Message from 'react-bulma-components/src/components/message'
-import { Input } from 'react-bulma-components/src/components/form'
+import Section from 'react-bulma-components/lib/components/section'
+import Container from 'react-bulma-components/lib/components/container'
+import Heading from 'react-bulma-components/lib/components/heading'
+import Loader from 'react-bulma-components/lib/components/loader'
+import Message from 'react-bulma-components/lib/components/message'
+import { Input } from 'react-bulma-components/lib/components/form'
 import ButtonHome from '../components/buttons/ButtonHome'
 
 const GET_BOOKS = gql`

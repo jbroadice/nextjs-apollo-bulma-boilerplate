@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Button from 'react-bulma-components/src/components/button'
-import Icon from 'react-bulma-components/src/components/icon'
+import Button from 'react-bulma-components/lib/components/button'
+import Icon from 'react-bulma-components/lib/components/icon'
 
 const ButtonHome = props =>
   <Link prefetch href='/'>

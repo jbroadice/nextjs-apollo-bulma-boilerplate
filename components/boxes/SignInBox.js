@@ -5,10 +5,10 @@ import cookie from 'cookie'
 import redirect from '../../utils/redirect'
 import 'isomorphic-unfetch'
 
-import Box from 'react-bulma-components/src/components/box'
-import { Field, Control, Input } from 'react-bulma-components/src/components/form'
-import Button from 'react-bulma-components/src/components/button'
-import Message from 'react-bulma-components/src/components/message'
+import Box from 'react-bulma-components/lib/components/box'
+import { Field, Control, Input } from 'react-bulma-components/lib/components/form'
+import Button from 'react-bulma-components/lib/components/button'
+import Message from 'react-bulma-components/lib/components/message'
 
 class SignInBox extends React.Component {
   state = {
