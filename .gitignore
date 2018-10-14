@@ -2,6 +2,7 @@
 bundles
 .next
 .DS_Store
+logs
 
 # Dependencies
-node_modules/
+node_modules
