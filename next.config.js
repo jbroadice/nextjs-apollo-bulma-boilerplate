@@ -7,7 +7,9 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 // next.js configuration
 const nextConfig = {
-  webpack: (config) => {
+  poweredByHeader: false,
+
+  webpack: (config, { dev, isServer }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       '_variables.sass': path.resolve(__dirname, 'sass/_variables.scss')
@@ -30,7 +32,6 @@ const nextConfig = {
   }
 }
 
-
 module.exports = withPlugins([
 
   // node-sass
@@ -38,8 +39,8 @@ module.exports = withPlugins([
 
   // webpack-bundle-analyzer
   [bundleAnalyzer, {
-    analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
-    analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
+    analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
+    analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
     bundleAnalyzerConfig: {
       server: {
         analyzerMode: 'static',
