@@ -1,8 +1,9 @@
 import cookie from 'cookie'
-import isNode from './isNode'
 
 export default function getTokenFromCookie(headers) {
-  const cookies = isNode() ? headers.cookie : document.cookie
+  const cookies = process.browser ? document.cookie : headers.cookie
+
+  console.log('getTokenFromCookie', cookies)
 
   if (cookies) {
     return cookie.parse(cookies).token
