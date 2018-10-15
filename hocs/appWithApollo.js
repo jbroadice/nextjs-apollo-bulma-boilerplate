@@ -63,8 +63,7 @@ export default App => {
 
       return {
         ...appProps,
-        apolloState,
-        // headers
+        apolloState
       }
     }
 
@@ -72,9 +71,7 @@ export default App => {
       super(props)
       // `getDataFromTree` renders the component first, the client is passed off as a property.
       // After that rendering is done using Next's normal rendering pipeline
-      this.apolloClient = initApollo(props.apolloState, {
-        // headers: props.headers
-      })
+      this.apolloClient = initApollo(props.apolloState)
     }
 
     render () {

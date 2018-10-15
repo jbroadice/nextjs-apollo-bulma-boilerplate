@@ -21,7 +21,6 @@ function create (initialState, { headers }) {
     const token = getTokenFromCookie(headers)
     return {
       headers: {
-        ...headers,
         authorization: token ? `Bearer ${token}` : ''
       }
     }
