@@ -104,6 +104,7 @@ class SignInBox extends React.Component {
                 placeholder='Email'
                 autoFocus
                 onChange={ this.onEmailChange }
+                onBlur={ this.onEmailChange }
                 value={ email } />
             </Control>
           </Field>
@@ -114,6 +115,7 @@ class SignInBox extends React.Component {
                 size='large'
                 placeholder='Password'
                 onChange={ this.onPasswordChange }
+                onBlur={ this.onPasswordChange }
                 value={ password } />
             </Control>
           </Field>
