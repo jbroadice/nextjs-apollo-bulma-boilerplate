@@ -50,12 +50,17 @@ class SignInBox extends React.Component {
       })
 
       if (!res.ok) {
-        error = res.statusText
+        if (res.status >= 400 && res.status < 500) {
+          error = 'Invalid sign in credentials provided.'
+        }
+        else {
+          res.statusText || 'Unknown error.'
+        }
       }
 
       res = await res.json()
     } catch (e) {
-      error = e.message
+      error = `Network error: ${e.message}`
       res = null
     }
 
