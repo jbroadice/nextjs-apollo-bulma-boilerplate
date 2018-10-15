@@ -1,7 +1,7 @@
 import { Query, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
-import Head from 'next/head'
 
+import PageHead from '../components/meta/PageHead'
 import Section from 'react-bulma-components/lib/components/section'
 import Container from 'react-bulma-components/lib/components/container'
 import Heading from 'react-bulma-components/lib/components/heading'
@@ -64,9 +64,9 @@ class Books extends React.Component {
 
     return (
       <Section>
-        <Head>
+        <PageHead>
           <title>Books</title>
-        </Head>
+        </PageHead>
         <Container className='content'>
           <Heading size={ 2 }>
             Books:

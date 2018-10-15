@@ -1,8 +1,8 @@
 import { withApollo } from 'react-apollo'
 import signout from '../utils/signout'
 
-import Head from 'next/head'
 import HeroHome from '../components/heroes/HeroHome'
+import PageHead from '../components/meta/PageHead'
 import Link from 'next/link'
 import Container from 'react-bulma-components/lib/components/container'
 import Section from 'react-bulma-components/lib/components/section'
@@ -10,9 +10,9 @@ import Button from 'react-bulma-components/lib/components/button'
 
 const Index = props => (
   <div>
-    <Head>
+    <PageHead>
       <title>Hello world!</title>
-    </Head>
+    </PageHead>
 
     <Section>
       <HeroHome

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Head from 'next/head'
+import PageHead from '../components/meta/PageHead'
 import Section from 'react-bulma-components/lib/components/section'
 import Container from 'react-bulma-components/lib/components/container'
 import Heading from 'react-bulma-components/lib/components/heading'
@@ -36,9 +36,9 @@ class About extends Component {
   render() {
     return (
       <Section>
-        <Head>
+        <PageHead>
           <title>About</title>
-        </Head>
+        </PageHead>
         <Container>
           <Heading size={1}>About</Heading>
 

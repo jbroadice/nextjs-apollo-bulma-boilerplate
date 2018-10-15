@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import PageHead from '../components/meta/PageHead'
 import Section from 'react-bulma-components/lib/components/section'
 import Box from 'react-bulma-components/lib/components/box'
 import Tile from 'react-bulma-components/lib/components/tile'
@@ -10,9 +10,9 @@ import '../sass/pages/_tiles.scss'
 
 const Tiles = props => (
   <Section>
-    <Head>
+    <PageHead>
       <title>Tiles</title>
-    </Head>
+    </PageHead>
     <Box>
       <Tile kind="ancestor">
         <Tile size={8} vertical>
