@@ -3,6 +3,7 @@ import App, { Container } from 'next/app'
 import { ApolloProvider } from 'react-apollo'
 import appWithApollo from '../hocs/appWithApollo'
 import appWithAuth from '../hocs/appWithAuth'
+import appWithServiceWorker from '../hocs/appWithServiceWorker'
 import { trim, flowRight } from 'lodash-es'
 
 import '../sass/styles.scss'
@@ -45,5 +46,6 @@ class MyApp extends App {
 
 export default flowRight(
   appWithApollo,
-  appWithAuth
+  appWithAuth,
+  appWithServiceWorker
 )(MyApp)
