@@ -1,4 +1,5 @@
 import { withApollo } from 'react-apollo'
+import withUser from '../hocs/withUser'
 import signout from '../utils/signout'
 
 import HeroHome from '../components/heroes/HeroHome'
@@ -8,7 +9,7 @@ import Container from 'react-bulma-components/lib/components/container'
 import Section from 'react-bulma-components/lib/components/section'
 import Button from 'react-bulma-components/lib/components/button'
 
-const Index = props => (
+const Index = ({ user, client }) => (
   <div>
     <PageHead>
       <title>Hello world!</title>
@@ -18,7 +19,7 @@ const Index = props => (
       <HeroHome
         color='primary'
         renderTitle={ () => (
-          <span>About</span>
+          <span>Hello, { user.firstName }!</span>
         )}
         renderSubtitle={ () => (
           <Link prefetch href='/about'>
@@ -53,10 +54,10 @@ const Index = props => (
 
     <Section>
       <Container>
-        <Button onClick={ () => { signout(props.client)() } }>Sign out</Button>
+        <Button onClick={ () => { signout(client)() } }>Sign out</Button>
       </Container>
     </Section>
   </div>
 )
 
-export default withApollo(Index)
+export default withUser(withApollo(Index))

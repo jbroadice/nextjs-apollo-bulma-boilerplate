@@ -1,6 +1,4 @@
 import React from 'react'
-import redirect from '../utils/redirect'
-import checkLoggedIn from '../utils/checkLoggedIn'
 
 export default App => {
   return class WithServiceWorker extends React.Component {

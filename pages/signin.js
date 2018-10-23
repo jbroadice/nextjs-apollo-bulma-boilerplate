@@ -1,7 +1,6 @@
 import React from 'react'
 
 import redirect from '../utils/redirect'
-import checkLoggedIn from '../utils/checkLoggedIn'
 
 import PageHead from '../components/meta/PageHead'
 import Section from 'react-bulma-components/lib/components/section'
@@ -10,19 +9,7 @@ import Container from 'react-bulma-components/lib/components/container'
 import Columns from 'react-bulma-components/lib/components/columns'
 import SignInBox from '../components/boxes/SignInBox'
 
-export default class SignIn extends React.Component {
-  static async getInitialProps (context) {
-    const { loggedInUser } = await checkLoggedIn(context.apolloClient)
-
-    if (loggedInUser.user) {
-      // Already signed in? No need to continue.
-      // Throw them back to the main page
-      redirect(context, '/')
-    }
-
-    return {}
-  }
-
+class SignIn extends React.Component {
   render() {
     return (
       <Section className='is-paddingless'>
@@ -42,3 +29,5 @@ export default class SignIn extends React.Component {
     )
   }
 }
+
+export default SignIn
