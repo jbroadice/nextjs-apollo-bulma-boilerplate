@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { getDataFromTree } from 'react-apollo'
+import { createNetworkStatusNotifier } from 'react-apollo-network-status'
 import Head from 'next/head'
 
 import initApollo from '../utils/initApollo'
@@ -69,13 +70,27 @@ export default App => {
 
     constructor (props) {
       super(props)
+
+      const {
+        NetworkStatusNotifier,
+        link: networkStatusNotifierLink
+      } = process.browser ? createNetworkStatusNotifier() : {}
+
+      this.NetworkStatusNotifier = NetworkStatusNotifier
+
       // `getDataFromTree` renders the component first, the client is passed off as a property.
       // After that rendering is done using Next's normal rendering pipeline
-      this.apolloClient = initApollo(props.apolloState, {})
+      this.apolloClient = initApollo(props.apolloState, { networkStatusNotifierLink })
     }
 
     render () {
-      return <App {...this.props} apolloClient={this.apolloClient} />
+      return (
+        <App
+          {...this.props}
+          apolloClient={this.apolloClient}
+          NetworkStatusNotifier={this.NetworkStatusNotifier}
+        />
+      )
     }
   }
 }

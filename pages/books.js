@@ -80,8 +80,6 @@ class Books extends React.Component {
 
           <Query query={ GET_BOOKS } variables={ this.getQueryVariables() }>
             {({ loading, error, data }) => {
-              console.log('Apollo Query', { loading, error, data })
-
               if (error) return this.renderErrorMessage(error)
               if (loading) return this.renderLoadingSpinner()
 

@@ -29,15 +29,34 @@ class MyApp extends App {
     return `page-${trim(page, '/')}`
   }
 
+  renderMain = ({ loading } = {}) => {
+    const { Component, pageProps } = this.props
+    return (
+      <React.Fragment>
+        { loading && (
+          <style jsx global>{`
+            body, body * {
+              cursor: progress !important;
+            }
+          `}
+          </style>
+        )}
+        <main className={ this.pageClassName }>
+          <Component {...pageProps} />
+        </main>
+      </React.Fragment>
+    )
+  }
+
   render () {
-    const { Component, pageProps, apolloClient } = this.props
+    const { apolloClient, NetworkStatusNotifier } = this.props
 
     return (
       <Container>
         <ApolloProvider client={ apolloClient }>
-          <main className={ this.pageClassName }>
-            <Component {...pageProps} />
-          </main>
+          { NetworkStatusNotifier
+            ? <NetworkStatusNotifier render={this.renderMain} />
+            : this.renderMain() }
         </ApolloProvider>
       </Container>
     )
