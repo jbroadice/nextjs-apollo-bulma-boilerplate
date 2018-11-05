@@ -1,6 +1,7 @@
 import { withApollo } from 'react-apollo'
 import withUser from '../hocs/withUser'
 import signout from '../utils/signout'
+import checkLoggedIn from '../utils/checkLoggedIn'
 
 import HeroHome from '../components/heroes/HeroHome'
 import PageHead from '../components/meta/PageHead'
@@ -54,6 +55,7 @@ const Index = ({ user, client }) => (
 
     <Section>
       <Container>
+        <Button onClick={ async () => { console.log(await checkLoggedIn(client)) } }>Check user</Button>
         <Button onClick={ () => { signout(client)() } }>Sign out</Button>
       </Container>
     </Section>

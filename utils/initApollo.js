@@ -1,8 +1,10 @@
-import { ApolloClient, InMemoryCache } from 'apollo-boost'
+import { ApolloClient, InMemoryCache, Observable } from 'apollo-boost'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
+import { onError } from 'apollo-link-error'
 import fetch from 'isomorphic-unfetch'
 import getTokenFromCookie from './getTokenFromCookie'
+import refreshToken from './refreshToken'
 
 let apolloClient = null
 
@@ -11,22 +13,62 @@ if (!process.browser) {
   global.fetch = fetch
 }
 
-function create (initialState, { headers, networkStatusNotifierLink }) {
+function create (initialState, { headers, res, networkStatusNotifierLink }) {
   const httpLink = createHttpLink({
     uri: 'http://localhost:4000/graphql',
     credentials: 'same-origin'
   })
 
   const authLink = setContext(() => {
-    const token = getTokenFromCookie(headers)
-    return {
+    const tokens = getTokenFromCookie(headers)
+    return tokens ? {
       headers: {
-        authorization: token ? `Bearer ${token}` : ''
+        authorization: tokens.token ? `Bearer ${tokens.token}` : ''
+      }
+    } : null
+  })
+
+  const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
+    if (graphQLErrors) {
+      for (let err of graphQLErrors) {
+        switch (err.extensions.code) {
+          case 'UNAUTHENTICATED':
+            const tokensFromCookie = getTokenFromCookie(headers)
+
+            if (tokensFromCookie) {
+              // Let's refresh token through async request
+              return new Observable(observer => {
+                refreshToken(tokensFromCookie, { headers, res })
+                  .then(refreshResponse => {
+                    operation.setContext({
+                      headers: {
+                        authorization: `Bearer ${refreshResponse.token}`,
+                      }
+                    })
+                  })
+                  .then(() => {
+                    const subscriber = {
+                      next: observer.next.bind(observer),
+                      error: observer.error.bind(observer),
+                      complete: observer.complete.bind(observer)
+                    }
+
+                    // Retry last failed request
+                    forward(operation).subscribe(subscriber)
+                  })
+                  .catch(error => {
+                    // No refresh or client token available, we force user to login
+                    observer.error(error)
+                  })
+              })
+            }
+        }
       }
     }
   })
 
-  let link = authLink.concat(httpLink)
+  let link = errorLink.concat(authLink.concat(httpLink))
+
   if (networkStatusNotifierLink) {
     link = networkStatusNotifierLink.concat(link)
   }

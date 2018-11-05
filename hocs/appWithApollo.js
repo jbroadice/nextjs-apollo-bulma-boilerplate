@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { getDataFromTree } from 'react-apollo'
 import { createNetworkStatusNotifier } from 'react-apollo-network-status'
 import Head from 'next/head'
+import cookie from 'cookie'
 
 import initApollo from '../utils/initApollo'
 
@@ -18,7 +19,8 @@ export default App => {
 
       const headers = req && req.headers
       const apollo = initApollo({}, {
-        headers
+        headers,
+        res
       })
 
       ctx.ctx.apolloClient = apollo

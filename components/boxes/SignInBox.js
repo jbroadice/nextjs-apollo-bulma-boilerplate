@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withApollo } from 'react-apollo'
-import cookie from 'cookie'
 import redirect from '../../utils/redirect'
+import storeTokens from '../../utils/storeTokens'
 import 'isomorphic-unfetch'
 
 import Box from 'react-bulma-components/lib/components/box'
@@ -66,16 +66,14 @@ class SignInBox extends React.Component {
 
     this.setState({ error, loading: false })
 
-    if (res && res.token) {
-      this.signinComplete(res.token)
+    if (res && res.tokens) {
+      this.signinComplete(res.tokens)
     }
   }
 
-  signinComplete = (token) => {
-    // Store the token in cookie
-    document.cookie = cookie.serialize('token', token, {
-      maxAge: 30 * 24 * 60 * 60 // 30 days
-    })
+  signinComplete = (tokens) => {
+    storeTokens(tokens)
+
     // Force a reload of all the current queries now that the user is logged in
     this.props.client.cache.reset().then(() => {
       redirect({}, '/')
