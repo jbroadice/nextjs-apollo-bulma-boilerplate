@@ -5,7 +5,7 @@
 - Uses [react-bulma-components](https://github.com/couds/react-bulma-components)
 - [SASS](https://github.com/zeit/next-plugins/tree/master/packages/next-sass)-ready
 - Uses GraphQL [apollo-client](https://github.com/apollographql/apollo-client) for data
-- Working JWT authentication / sign-in / token refresh flow (using Apollo retry middleware)
+- SSR-friendly JWT authentication / sign-in / token refresh flow (using Apollo retry middleware)
 - Uses [service workers](https://github.com/goldhand/sw-precache-webpack-plugin) to cache external project dependencies
 - Includes [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 - Optimised for tree-shaking
