@@ -1,7 +1,7 @@
 import { withApollo } from 'react-apollo'
 import withUser from '../hocs/withUser'
-import signout from '../utils/signout'
-import checkLoggedIn from '../utils/checkLoggedIn'
+import signout from '../lib/signout'
+import checkLoggedIn from '../lib/checkLoggedIn'
 
 import HeroHome from '../components/heroes/HeroHome'
 import PageHead from '../components/meta/PageHead'
@@ -13,7 +13,7 @@ import Button from 'react-bulma-components/lib/components/button'
 const Index = ({ user, client }) => (
   <div>
     <PageHead>
-      <title>Hello world!</title>
+      <title>Dashboard</title>
     </PageHead>
 
     <Section>

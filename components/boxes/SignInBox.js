@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withApollo } from 'react-apollo'
-import redirect from '../../utils/redirect'
-import storeTokens from '../../utils/storeTokens'
+import redirect from '../../lib/redirect'
+import storeTokens from '../../lib/storeTokens'
 import 'isomorphic-unfetch'
 
 import Box from 'react-bulma-components/lib/components/box'

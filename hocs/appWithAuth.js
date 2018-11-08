@@ -1,6 +1,6 @@
 import React from 'react'
-import redirect from '../utils/redirect'
-import checkLoggedIn from '../utils/checkLoggedIn'
+import redirect from '../lib/redirect'
+import checkLoggedIn from '../lib/checkLoggedIn'
 import UserContext from '../contexts/UserContext'
 
 export default App => {

@@ -5,7 +5,7 @@ import { createNetworkStatusNotifier } from 'react-apollo-network-status'
 import Head from 'next/head'
 import cookie from 'cookie'
 
-import initApollo from '../utils/initApollo'
+import initApollo from '../lib/initApollo'
 
 export default App => {
   return class WithData extends React.Component {

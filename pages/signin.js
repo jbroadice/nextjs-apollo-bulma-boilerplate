@@ -1,6 +1,6 @@
 import React from 'react'
 
-import redirect from '../utils/redirect'
+import redirect from '../lib/redirect'
 
 import PageHead from '../components/meta/PageHead'
 import Section from 'react-bulma-components/lib/components/section'
