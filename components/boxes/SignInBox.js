@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withApollo } from 'react-apollo'
+import signin from '../../lib/signin'
 import redirect from '../../lib/redirect'
 import storeTokens from '../../lib/storeTokens'
-import 'isomorphic-unfetch'
 
 import Box from 'react-bulma-components/lib/components/box'
 import { Field, Control, Input } from 'react-bulma-components/lib/components/form'
@@ -37,32 +37,7 @@ class SignInBox extends React.Component {
 
     const { email, password } = this.state
 
-    let error = null
-    let res = null
-    try {
-      res = await fetch('http://jack-pc:4000/signin', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      })
-
-      if (!res.ok) {
-        if (res.status >= 400 && res.status < 500) {
-          error = 'Invalid sign in credentials provided.'
-        }
-        else {
-          res.statusText || 'Unknown error.'
-        }
-      }
-
-      res = await res.json()
-    } catch (e) {
-      error = `Network error: ${e.message}`
-      res = null
-    }
+    const { res, error } = await signin({ email, password })
 
     this.setState({ error, loading: false })
 

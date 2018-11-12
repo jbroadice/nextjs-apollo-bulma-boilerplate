@@ -38,7 +38,7 @@ class MyApp extends App {
       <React.Fragment>
         { loading && (
           <style jsx global>{`
-            body, body * {
+            html, body, body * {
               cursor: progress !important;
             }
           `}
