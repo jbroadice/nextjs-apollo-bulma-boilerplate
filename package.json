@@ -29,7 +29,7 @@
     "lodash-es": "^4.17.11",
     "next": "^7.0.2",
     "next-compose-plugins": "^2.1.1",
-    "next-nprogress": "file:../next-nprogress",
+    "next-nprogress": "git+https://github.com/jchapple/next-nprogress.git#build",
     "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",

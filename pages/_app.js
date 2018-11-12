@@ -1,10 +1,13 @@
 import React from 'react'
-import App, { Container } from 'next/app'
-import { ApolloProvider } from 'react-apollo'
+import { trim, flowRight } from 'lodash-es'
+
 import appWithApollo from '../hocs/appWithApollo'
 import appWithAuth from '../hocs/appWithAuth'
 import appWithServiceWorker from '../hocs/appWithServiceWorker'
-import { trim, flowRight } from 'lodash-es'
+
+import App, { Container } from 'next/app'
+import { ApolloProvider } from 'react-apollo'
+import NProgress from 'next-nprogress/component'
 
 import '../sass/styles.scss'
 
@@ -53,6 +56,7 @@ class MyApp extends App {
 
     return (
       <Container>
+        <NProgress />
         <ApolloProvider client={ apolloClient }>
           { NetworkStatusNotifier
             ? <NetworkStatusNotifier render={this.renderMain} />
